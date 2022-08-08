@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from .models import Tradition
 from .serializers import TraditionSerializer
 
 
 # Create your views here.
+@csrf_exempt
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {
@@ -18,6 +20,7 @@ def apiOverview(request):
     return Response(api_urls)
 
 
+@csrf_exempt
 @api_view(['GET'])
 def traditionList(request):
     tradition = Tradition.objects.all()
@@ -25,6 +28,7 @@ def traditionList(request):
     return Response(serializer.data)
 
 
+@csrf_exempt
 @api_view(['GET'])
 def traditionDetail(request, pk):
     tradition = Tradition.objects.get(id=pk)
@@ -32,6 +36,7 @@ def traditionDetail(request, pk):
     return Response(serializer.data)
 
 
+@csrf_exempt
 @api_view(['POST'])
 def traditionCreate(request):
     serializer = TraditionSerializer(data=request.data)
@@ -40,6 +45,7 @@ def traditionCreate(request):
     return Response(serializer.data)
 
 
+@csrf_exempt
 @api_view(['POST'])
 def traditionUpdate(request, pk):
     tradition = Tradition.objects.get(id=pk)
@@ -49,8 +55,10 @@ def traditionUpdate(request, pk):
     return Response(serializer.data)
 
 
+@csrf_exempt
 @api_view(['DELETE'])
 def traditionDelete(request, pk):
     tradition = Tradition.objects.get(id=pk)
     tradition.delete()
     return Response('Item successfully deleted!')
+    
