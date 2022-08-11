@@ -86,17 +86,14 @@ WSGI_APPLICATION = 'see9ja.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-import pymysql
-pymysql.install_as_MySQLdb()
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sql4467590',
-        'USER': 'sql4467590',
-        'PASSWORD': 'qZuhzK6NsR',
-        'HOST': 'sql4.freemysqlhosting.net',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ddfefllrtmperg',
+        'USER': 'wnounnswbiogts',
+        'PASSWORD': 'a40358d5e40bce59aa25d07241fae7f2272f0ce695aedcef95e690e8aac3b27d',
+        'HOST': 'ec2-44-206-137-96.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
