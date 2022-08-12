@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
-from .models import Tourism, Tradition, ArtsNCulture
-from .serializers import TourismSerializer, TraditionSerializer, ArtsNCultureSerializer
+from .models import History, Tradition, Art
+from .serializers import HistorySerializer, TraditionSerializer, ArtSerializer
 
 
 # Create your views here.
@@ -11,11 +11,11 @@ from .serializers import TourismSerializer, TraditionSerializer, ArtsNCultureSer
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {
-        'Tourism List': '/tourism-list/',
-        'Tourism Details': '/tourism-detail/<str:pk>/',
-        'Tourism Create': '/tourism-create/',
-        'Tourism Update': '/tourism-update/<str:pk>/',
-        'Tourism Delete': '/tourism-delete/<str:pk>/',
+        'History List': '/history-list/',
+        'History Details': '/history-detail/<str:pk>/',
+        'History Create': '/history-create/',
+        'History Update': '/history-update/<str:pk>/',
+        'History Delete': '/history-delete/<str:pk>/',
 
         'Tradition List': '/tradition-list/',
         'Tradition Details': '/tradition-detail/<str:pk>/',
@@ -23,11 +23,11 @@ def apiOverview(request):
         'Tradition Update': '/tradition-update/<str:pk>/',
         'Tradition Delete': '/tradition-delete/<str:pk>/',
 
-        'ArtsNCulture List': '/artsNculture-list/',
-        'ArtsNCulture Details': '/artsNculture-detail/<str:pk>/',
-        'ArtsNCulture Create': '/artsNculture-create/',
-        'ArtsNCulture Update': '/artsNculture-update/<str:pk>/',
-        'ArtsNCulture Delete': '/artsNculture-delete/<str:pk>/',
+        'Art List': '/art-list/',
+        'Art Details': '/art-detail/<str:pk>/',
+        'Art Create': '/art-create/',
+        'Art Update': '/art-update/<str:pk>/',
+        'Art Delete': '/art-delete/<str:pk>/',
     }
     return Response(api_urls)
 
@@ -35,40 +35,40 @@ def apiOverview(request):
 #  Tourism view functions
 @csrf_exempt
 @api_view(['GET'])
-def tourismList(request):
-    tourism = Tourism.objects.all()
-    serializer = TourismSerializer(tourism, many=True)
+def historyList(request):
+    history = History.objects.all()
+    serializer = HistorySerializer(history, many=True)
     return Response(serializer.data)
 
 @csrf_exempt
 @api_view(['GET'])
-def tourismDetail(request, pk):
-    tourism = Tourism.objects.get(id=pk)
-    serializer = TourismSerializer(tourism, many=False)
+def historyDetail(request, pk):
+    history = History.objects.get(id=pk)
+    serializer = HistorySerializer(history, many=False)
     return Response(serializer.data)
 
 @csrf_exempt
 @api_view(['POST'])
-def tourismCreate(request):
-    serializer = TourismSerializer(data=request.data)
+def historyCreate(request):
+    serializer = HistorySerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
 
 @csrf_exempt
 @api_view(['POST'])
-def tourismUpdate(request, pk):
-    tourism = Tourism.objects.get(id=pk)
-    serializer = TourismSerializer(instance=tourism, data=request.data)
+def historyUpdate(request, pk):
+    history = History.objects.get(id=pk)
+    serializer = HistorySerializer(instance=history, data=request.data)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
 
 @csrf_exempt
 @api_view(['DELETE'])
-def tourismDelete(request, pk):
-    tourism = Tourism.objects.get(id=pk)
-    tourism.delete()
+def historyDelete(request, pk):
+    history = History.objects.get(id=pk)
+    history.delete()
     return Response('Item successfully deleted!')
     
 
@@ -112,41 +112,41 @@ def traditionDelete(request, pk):
     return Response('Item successfully deleted!')
     
 
-# ArtsNCulture view functions
+# Art view functions
 @csrf_exempt
 @api_view(['GET'])
-def artsNcultureList(request):
-    artsNculture = ArtsNCulture.objects.all()
-    serializer = ArtsNCultureSerializer(artsNculture, many=True)
+def artList(request):
+    art = Art.objects.all()
+    serializer = ArtSerializer(art, many=True)
     return Response(serializer.data)
 
 @csrf_exempt
 @api_view(['GET'])
-def artsNcultureDetail(request, pk):
-    artsNculture = ArtsNCulture.objects.get(id=pk)
-    serializer = ArtsNCultureSerializer(artsNculture, many=False)
+def artDetail(request, pk):
+    art = Art.objects.get(id=pk)
+    serializer = ArtSerializer(art, many=False)
     return Response(serializer.data)
 
 @csrf_exempt
 @api_view(['POST'])
-def artsNcultureCreate(request):
-    serializer = ArtsNCultureSerializer(data=request.data)
+def artCreate(request):
+    serializer = ArtSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
 
 @csrf_exempt
 @api_view(['POST'])
-def artsNcultureUpdate(request, pk):
-    artNculture = ArtsNCulture.objects.get(id=pk)
-    serializer = ArtsNCultureSerializer(instance=artNculture, data=request.data)
+def artUpdate(request, pk):
+    art = Art.objects.get(id=pk)
+    serializer = ArtSerializer(instance=art, data=request.data)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
 
 @csrf_exempt
 @api_view(['DELETE'])
-def artsNcultureDelete(request, pk):
-    artNculture = ArtsNCulture.objects.get(id=pk)
-    artNculture.delete()
+def artDelete(request, pk):
+    art = Art.objects.get(id=pk)
+    art.delete()
     return Response('Item successfully deleted!')

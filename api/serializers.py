@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from .models import Tourism, Tradition, ArtsNCulture
+from .models import History, Tradition, Art
 
 
-class TourismSerializer(serializers.ModelSerializer):
+class HistorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tourism
+        model = History
         fields = '__all__'
 
 
@@ -14,7 +14,7 @@ class TraditionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ArtsNCultureSerializer(serializers.ModelSerializer):
+class ArtSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ArtsNCulture
+        model = Art
         fields = '__all__'

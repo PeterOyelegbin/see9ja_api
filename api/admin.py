@@ -1,8 +1,9 @@
 from re import T
 from django.contrib import admin
-from .models import Tourism, Tradition, ArtsNCulture
+from .models import History, Tradition, Art
+
 
 # Register your models here.
-admin.site.register(Tourism)
+admin.site.register(History)
 admin.site.register(Tradition)
-admin.site.register(ArtsNCulture)
+admin.site.register(Art)

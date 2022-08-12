@@ -1,10 +1,11 @@
 from django.db import models
 
 # Create your models here.
-class Tourism(models.Model):
+class History(models.Model):
     title = models.CharField(max_length=255)
-    image = models.ImageField(blank=True, null=True, upload_to = 'sea9ja/tourism/')
-    description = models.TextField(blank=True, null=True)
+    subtitle = models.CharField(max_length=255)
+    image = models.ImageField(upload_to = 'sea9ja/tourism/')
+    description = models.TextField()
 
     def __str__(self):
         return self.title
@@ -12,17 +13,17 @@ class Tourism(models.Model):
 
 class Tradition(models.Model):
     title = models.CharField(max_length=255)
-    image = models.ImageField(blank=True, null=True, upload_to = 'sea9ja/traditions/')
-    description = models.TextField(blank=True, null=True)
+    subtitle = models.CharField(max_length=255)
+    image = models.ImageField(upload_to = 'sea9ja/traditions/')
+    description = models.TextField()
 
     def __str__(self):
         return self.title
 
 
-class ArtsNCulture(models.Model):
+class Art(models.Model):
     title = models.CharField(max_length=255)
-    image = models.ImageField(blank=True, null=True, upload_to = 'sea9ja/artNculture/')
-    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to = 'sea9ja/artNculture/')
 
     def __str__(self):
         return self.title
