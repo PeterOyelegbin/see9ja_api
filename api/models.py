@@ -2,9 +2,9 @@ from django.db import models
 
 # Create your models here.
 class History(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, unique=True)
     subtitle = models.CharField(max_length=255)
-    image = models.ImageField(upload_to = 'sea9ja/tourism/')
+    image = models.ImageField(upload_to='sea9ja/tourism/')
     description = models.TextField()
 
     def __str__(self):
@@ -12,9 +12,9 @@ class History(models.Model):
 
 
 class Tradition(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, unique=True)
     subtitle = models.CharField(max_length=255)
-    image = models.ImageField(upload_to = 'sea9ja/traditions/')
+    image = models.ImageField(upload_to='sea9ja/traditions/')
     description = models.TextField()
 
     def __str__(self):
@@ -22,8 +22,8 @@ class Tradition(models.Model):
 
 
 class Art(models.Model):
-    title = models.CharField(max_length=255)
-    image = models.ImageField(upload_to = 'sea9ja/artNculture/')
+    title = models.CharField(max_length=255, unique=True)
+    image = models.ImageField(upload_to='sea9ja/artNculture/')
 
     def __str__(self):
         return self.title
