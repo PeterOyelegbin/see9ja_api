@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
+from rest_framework import status
 from .models import History, Tradition, Art
 from .serializers import HistorySerializer, TraditionSerializer, ArtSerializer
 
@@ -19,7 +20,7 @@ def apiOverview(request):
 
         'Tradition List': '/tradition-list/',
         'Tradition Details': '/tradition-detail/<str:pk>/',
-        'Traditon Create': '/tradition-create/',
+        'Tradition Create': '/tradition-create/',
         'Tradition Update': '/tradition-update/<str:pk>/',
         'Tradition Delete': '/tradition-delete/<str:pk>/',
 
@@ -29,7 +30,7 @@ def apiOverview(request):
         'Art Update': '/art-update/<str:pk>/',
         'Art Delete': '/art-delete/<str:pk>/',
     }
-    return Response(api_urls)
+    return Response(api_urls, status=status.HTTP_200_OK)
 
 
 #  Tourism view functions
@@ -38,14 +39,14 @@ def apiOverview(request):
 def historyList(request):
     history = History.objects.all()
     serializer = HistorySerializer(history, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @csrf_exempt
 @api_view(['GET'])
 def historyDetail(request, pk):
     history = History.objects.get(id=pk)
     serializer = HistorySerializer(history, many=False)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @csrf_exempt
 @api_view(['POST'])
@@ -53,7 +54,8 @@ def historyCreate(request):
     serializer = HistorySerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data)
+        return Response('Data created successfully', status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 @csrf_exempt
 @api_view(['POST'])
@@ -62,14 +64,15 @@ def historyUpdate(request, pk):
     serializer = HistorySerializer(instance=history, data=request.data)
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data)
+        return Response('Data updated successfully', status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 @csrf_exempt
 @api_view(['DELETE'])
 def historyDelete(request, pk):
     history = History.objects.get(id=pk)
     history.delete()
-    return Response('Item successfully deleted!')
+    return Response('Data successfully deleted!', status=status.HTTP_200_OK)
     
 
 # Tradition view functions
@@ -78,14 +81,14 @@ def historyDelete(request, pk):
 def traditionList(request):
     tradition = Tradition.objects.all()
     serializer = TraditionSerializer(tradition, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @csrf_exempt
 @api_view(['GET'])
 def traditionDetail(request, pk):
     tradition = Tradition.objects.get(id=pk)
     serializer = TraditionSerializer(tradition, many=False)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @csrf_exempt
 @api_view(['POST'])
@@ -93,7 +96,8 @@ def traditionCreate(request):
     serializer = TraditionSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data)
+        return Response('Data created successfully', status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 @csrf_exempt
 @api_view(['POST'])
@@ -102,14 +106,15 @@ def traditionUpdate(request, pk):
     serializer = TraditionSerializer(instance=tradition, data=request.data)
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data)
+        return Response('Data updated successfully', status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 @csrf_exempt
 @api_view(['DELETE'])
 def traditionDelete(request, pk):
     tradition = Tradition.objects.get(id=pk)
     tradition.delete()
-    return Response('Item successfully deleted!')
+    return Response('Data successfully deleted!', status=status.HTTP_200_OK)
     
 
 # Art view functions
@@ -118,14 +123,14 @@ def traditionDelete(request, pk):
 def artList(request):
     art = Art.objects.all()
     serializer = ArtSerializer(art, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @csrf_exempt
 @api_view(['GET'])
 def artDetail(request, pk):
     art = Art.objects.get(id=pk)
     serializer = ArtSerializer(art, many=False)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @csrf_exempt
 @api_view(['POST'])
@@ -133,7 +138,8 @@ def artCreate(request):
     serializer = ArtSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data)
+        return Response('Data created successfully', status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 @csrf_exempt
 @api_view(['POST'])
@@ -142,11 +148,12 @@ def artUpdate(request, pk):
     serializer = ArtSerializer(instance=art, data=request.data)
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data)
+        return Response('Data updated successfully', status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 @csrf_exempt
 @api_view(['DELETE'])
 def artDelete(request, pk):
     art = Art.objects.get(id=pk)
     art.delete()
-    return Response('Item successfully deleted!')
+    return Response('Data successfully deleted!', status=status.HTTP_200_OK)
